@@ -1,0 +1,26 @@
+{
+  "autorun": false,
+  "autokill": true,
+  "terminals": [
+    {
+      "name": "Development",
+      "cwd": "[workspaceFolder]",
+      "command": "yarn dev",
+      "recycle": true,
+      "open": false,
+      "focus": false,
+      "execute": true,
+      "onlyMultiple": true
+    },
+    {
+      "name": "Testing",
+      "cwd": "[workspaceFolder]",
+      "command": "yarn test --watchAll",
+      "recycle": true,
+      "open": false,
+      "focus": false,
+      "execute": true,
+      "onlyMultiple": true
+    }
+  ]
+}
