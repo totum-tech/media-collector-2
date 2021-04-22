@@ -20,12 +20,14 @@
   "dependencies": {
     "@straw-hat/logger": "1.0.0",
     "dotenv": "8.2.0",
+    "exiftool-vendored": "14.2.0",
     "glob": "7.1.6"
   },
   "devDependencies": {
     "@straw-hat/prettier-config": "1.0.2",
     "@types/glob": "7.1.3",
     "@types/jest": "26.0.14",
+    "@types/luxon": "1.26.4",
     "husky": "4.3.0",
     "jest": "26.4.2",
     "lint-staged": "10.4.0",

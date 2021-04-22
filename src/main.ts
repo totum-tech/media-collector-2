@@ -1,14 +1,17 @@
 import 'dotenv/config';
 import glob from 'glob';
 import logger from './logger';
+import { ExifTool } from 'exiftool-vendored';
 
 logger.info('Hello world!');
+const exifReader = new ExifTool();
 
 const INPUT_DIRECTORY = '/Volumes/photo/raws';
 
 type DirectoryPath = string;
 type MediaPath = string;
 type Filetype = string;
+type Media = any;
 
 const SUPPORTED_PHOTOS = ['jpg', 'png', 'arw', 'dng'];
 const SUPPORTED_VIDEOS = ['mov', 'mp4'];
@@ -38,6 +41,18 @@ async function findCompatibleMedia(
   });
 }
 
-findCompatibleMedia(INPUT_DIRECTORY).then((matches) =>
-  logger.info('Media 4 U', matches)
-);
+async function extractExifForFiles(files: MediaPath[]): Promise<Media[]> {
+  const exifs = await Promise.all(
+    files.map((mediaPath) => {
+      return exifReader.read(mediaPath);
+    })
+  );
+
+  await exifReader.end();
+
+  return exifs;
+}
+
+findCompatibleMedia(INPUT_DIRECTORY)
+  .then(extractExifForFiles)
+  .then((media) => logger.info('Media 4 U', media));
